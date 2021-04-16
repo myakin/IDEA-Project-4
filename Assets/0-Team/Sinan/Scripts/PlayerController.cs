@@ -46,19 +46,25 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        SprintFunction();
-        CrouchFunction();
-        MovementInput();
-        JumpFunction();
-        ControlDrag();
-        GroundDetectionSphereCast();
+        // SprintFunction();
+        // CrouchFunction();
+        // MovementInput();
+        // JumpFunction();
+        // ControlDrag();
+        // GroundDetectionSphereCast();
         CameraMovement();
-        slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
+        // slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
+
+        hor = Input.GetAxis("Horizontal");
+        ver = Input.GetAxis("Vertical");
+        transform.position+=(transform.forward * ver * moveSpeed + transform.right * hor * moveSpeed) * Time.deltaTime;
+        
+
     }
-    private void FixedUpdate()
-    {
-        Movement();
-    }
+    // private void FixedUpdate()
+    // {
+    //     Movement();
+    // }
     private void GroundDetectionSphereCast()
     {
         //This checks if the player is grounded, if the player is grounded they can jump again
@@ -179,12 +185,12 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, mouseX, 0f);
     }
     //We use this to check if the player is falling
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            isGrounded = false;
-            isJumping = true;
-        }
-    }
+    // private void OnCollisionExit(Collision collision)
+    // {
+    //     if (collision.gameObject.tag == "Ground")
+    //     {
+    //         isGrounded = false;
+    //         isJumping = true;
+    //     }
+    // }
 }
