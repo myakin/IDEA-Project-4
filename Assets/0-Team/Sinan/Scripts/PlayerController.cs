@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     public float runSpeed = 1;
     public float groundDrag;
     public float airDrag;
-    public float bounceDrag;
 
     [Header("Boolien checks")]
     public bool isGrounded = false;
@@ -166,8 +165,8 @@ public class PlayerController : MonoBehaviour
         //Jump function
         if (Input.GetKeyDown(KeyCode.Space) && !isJumping &&!isCrouching)
         {
-            //isJumping = true;
-            //isGrounded = false;
+            isJumping = true;
+            isGrounded = false;
             rb.velocity += jumpHeight * Vector3.up;
         }
     }
@@ -180,12 +179,12 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, mouseX, 0f);
     }
     //We use this to check if the player is falling
-    //private void OnCollisionExit(Collision collision)
-    //{
-    //    if (collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Phys" || collision.gameObject.tag == "HeavyPhys" || collision.gameObject.tag == "Slope")
-    //    {
-    //        isGrounded = false;
-    //        isJumping = true;
-    //    }
-    //}
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGrounded = false;
+            isJumping = true;
+        }
+    }
 }

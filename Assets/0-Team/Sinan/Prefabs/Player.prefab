@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4800173755898535298}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 88.6, y: 18.5, z: 108.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -51,9 +51,9 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4800173755898535298}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -92,7 +92,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4800173755898535298}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 8fb3cf8ea36080e4f83db5f0d1631232, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -111,18 +111,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98679c8411b1482429805d3a496f6d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 1000
   moveMultiplier: 1
   jumpHeight: 5
   runSpeed: 2
-  groundDrag: 0
+  groundDrag: 30
   airDrag: 0
-  bounceDrag: 0
   isGrounded: 0
   isJumping: 0
   isCrouching: 0
   sphereRadius: 0.4
-  sphereMaxDistance: 0
+  sphereMaxDistance: 0.6
   groundMask:
     serializedVersion: 2
     m_Bits: 0
