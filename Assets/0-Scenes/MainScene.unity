@@ -587,18 +587,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4800173755898535298, guid: a7f0b4bb1d3a28d47850c63027b8828d, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800173755898535300, guid: a7f0b4bb1d3a28d47850c63027b8828d, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800173755898535300, guid: a7f0b4bb1d3a28d47850c63027b8828d, type: 3}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4800173755898535302, guid: a7f0b4bb1d3a28d47850c63027b8828d, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -642,14 +630,6 @@ PrefabInstance:
     - target: {fileID: 4800173755898535302, guid: a7f0b4bb1d3a28d47850c63027b8828d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800173755898535303, guid: a7f0b4bb1d3a28d47850c63027b8828d, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4800173755898535303, guid: a7f0b4bb1d3a28d47850c63027b8828d, type: 3}
-      propertyPath: moveSpeed
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a7f0b4bb1d3a28d47850c63027b8828d, type: 3}
