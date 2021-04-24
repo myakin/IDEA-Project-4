@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,21 +24,33 @@ public class PlayerController : MonoBehaviour
     public float sphereMaxDistance;
     public LayerMask groundMask;
 
+    [Header("Weapon Manager")]
+    public WeaponManager weaponManager;
+
     [Header("Misc")]
     public Transform playerCamera;
     public float sensitivity = 1f;
     public CapsuleCollider playerCollider;//Called from the health script.
+    public bool isPlayerInstance;
 
 
     private Animator animator;
     private Rigidbody rb;
     private float mouseX, mouseY;
-    private float hor, ver;
+    private float hor, ver, fire;
     private bool isMoving;
     private RaycastHit slopeHit;
     private Vector3 slopeMoveDirection;
     private Vector3 moveDirection;
     private int indexSelector;
+    private PhotonView photonView;
+
+
+    private void Awake() {
+        photonView = GetComponent<PhotonView>();
+        isPlayerInstance = photonView.IsMine;
+    }
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -46,20 +60,23 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        // SprintFunction();
-        // CrouchFunction();
-        // MovementInput();
-        // JumpFunction();
-        // ControlDrag();
-        // GroundDetectionSphereCast();
-        CameraMovement();
-        // slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
+        if (isPlayerInstance) {
+            // SprintFunction();
+            // CrouchFunction();
+            // MovementInput();
+            // JumpFunction();
+            // ControlDrag();
+            // GroundDetectionSphereCast();
+            CameraMovement();
+            // slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
 
-        hor = Input.GetAxis("Horizontal");
-        ver = Input.GetAxis("Vertical");
-        transform.position+=(transform.forward * ver * moveSpeed + transform.right * hor * moveSpeed) * Time.deltaTime;
-        
+            hor = Input.GetAxis("Horizontal");
+            ver = Input.GetAxis("Vertical");
+            transform.position+=(transform.forward * ver * moveSpeed + transform.right * hor * moveSpeed) * Time.deltaTime;
 
+            Fire();
+
+        }
     }
     // private void FixedUpdate()
     // {
@@ -193,4 +210,13 @@ public class PlayerController : MonoBehaviour
     //         isJumping = true;
     //     }
     // }
+
+    public void Fire() {
+        fire = Input.GetAxis("Fire1");
+        if (fire==0) {
+            weaponManager.ReleaseFiringConstrains();
+        } else {
+            weaponManager.Fire();
+        }
+    }
 }
