@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         playerCollider = GetComponent<CapsuleCollider>();
         Cursor.lockState = CursorLockMode.Locked;
+        weaponManager = GetComponentInChildren<WeaponManager>();
     }
     private void Update()
     {
