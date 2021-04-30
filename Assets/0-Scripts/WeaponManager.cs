@@ -6,6 +6,10 @@ public class WeaponManager : MonoBehaviour {
     public string bulletPrefabName;
     public Transform bulletGenerationPointDummy;
     public float fireRate = 0.5f;
+    public float range = 100;
+    public float bulletSpeed = 1;
+    public float maxDamage = 1.5f;
+    
 
     private bool isPermittedToGenerateBullet = true;
 
@@ -18,6 +22,7 @@ public class WeaponManager : MonoBehaviour {
                 bulletGenerationPointDummy.rotation, 
                 null, 
                 delegate(GameObject anobject) { 
+                    anobject.GetComponent<Bullet>().Initiate(range, bulletSpeed, -Random.Range(0.3f, maxDamage));
                     ReleaseFiringConstrains();
                 }
             ); 
