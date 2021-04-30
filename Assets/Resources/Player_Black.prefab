@@ -534,6 +534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefabName: Bullet0
   bulletGenerationPointDummy: {fileID: 4090212011386998646}
+  fireRate: 5
 --- !u!1 &7936400752942200362
 GameObject:
   m_ObjectHideFlags: 0

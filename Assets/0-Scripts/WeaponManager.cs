@@ -5,25 +5,37 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour {
     public string bulletPrefabName;
     public Transform bulletGenerationPointDummy;
+    public float fireRate = 0.5f;
 
-    private bool isPermittedToGenerateBullet;
+    private bool isPermittedToGenerateBullet = true;
 
     public void Fire() {
         if (isPermittedToGenerateBullet) {
+            isPermittedToGenerateBullet = false;
             AddressablesManager.instance.SpawnObject(
                 bulletPrefabName, 
-                Vector3.zero, 
-                Quaternion.identity, 
+                bulletGenerationPointDummy.position, 
+                bulletGenerationPointDummy.rotation, 
                 null, 
                 delegate(GameObject anobject) { 
-                    isPermittedToGenerateBullet=false;
+                    ReleaseFiringConstrains();
                 }
             ); 
         } 
     }
 
+    private IEnumerator fireHoldCoroutine;
     public void ReleaseFiringConstrains() {
+        if (fireHoldCoroutine==null) {
+            fireHoldCoroutine = HoldFire();
+            StartCoroutine(fireHoldCoroutine);
+        }
+    }
+
+    private IEnumerator HoldFire() {
+        yield return new WaitForSeconds(1/fireRate);
         isPermittedToGenerateBullet = true;
+        fireHoldCoroutine = null;
     }
 
 }

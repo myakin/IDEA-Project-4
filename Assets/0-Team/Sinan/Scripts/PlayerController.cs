@@ -216,9 +216,7 @@ public class PlayerController : MonoBehaviour
 
     public void Fire() {
         fire = Input.GetAxis("Fire1");
-        if (fire==0) {
-            weaponManager.ReleaseFiringConstrains();
-        } else {
+        if (fire>0) {
             weaponManager.Fire();
         }
     }

@@ -55,6 +55,7 @@ public class AddressablesManager : MonoBehaviour {
                 obj.AddComponent<AddressableObjectOnDestroy>().addressableKey = addressableKey;
                 keysAndObjectCounts[addressableKey]++;
                 requests.Dequeue();
+                onSpawn(obj);
             }
             else
             {
