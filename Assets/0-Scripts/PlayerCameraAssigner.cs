@@ -12,7 +12,7 @@ public class PlayerCameraAssigner : MonoBehaviour {
             cam.localRotation = Quaternion.identity;
 
         }
-        Destroy(gameObject);
+        Destroy(this);
     }
 
     
