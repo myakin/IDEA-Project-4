@@ -11,6 +11,8 @@ public class PlayerCameraAssigner : MonoBehaviour {
             cam.localPosition = Vector3.zero;
             cam.localRotation = Quaternion.identity;
 
+            GetComponent<PlayerController>().playerCamera = cam;
+
         }
         Destroy(this);
     }

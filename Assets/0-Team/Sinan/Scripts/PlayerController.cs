@@ -196,11 +196,13 @@ public class PlayerController : MonoBehaviour
     }
     private void CameraMovement()
     {
-        mouseX += Input.GetAxis("Mouse X") * sensitivity;
-        mouseY += Input.GetAxis("Mouse Y") * sensitivity;
-        mouseY = Mathf.Clamp(mouseY, -90f, 90f);
-        playerCamera.transform.localRotation = Quaternion.Euler(-mouseY, 0f, 0f);
-        transform.rotation = Quaternion.Euler(0f, mouseX, 0f);
+        if (playerCamera) {
+            mouseX += Input.GetAxis("Mouse X") * sensitivity;
+            mouseY += Input.GetAxis("Mouse Y") * sensitivity;
+            mouseY = Mathf.Clamp(mouseY, -90f, 90f);
+            playerCamera.transform.localRotation = Quaternion.Euler(-mouseY, 0f, 0f);
+            transform.rotation = Quaternion.Euler(0f, mouseX, 0f);
+        }
     }
     //We use this to check if the player is falling
     // private void OnCollisionExit(Collision collision)
