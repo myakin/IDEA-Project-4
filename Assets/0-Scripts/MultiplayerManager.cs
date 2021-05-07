@@ -23,7 +23,11 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks {
     public GameObject lobbyCamera;
 
     private void Start() {
-        ConnectToServer();
+        if (UIManager.instance == null) {
+            AddressablesManager.instance.LoadAddressableSceneAdditive("MainPlayerUI", delegate { ConnectToServer(); });
+        } else {
+            ConnectToServer();
+        }
     }
 
     public void ConnectToServer() {
@@ -34,10 +38,20 @@ public class MultiplayerManager : MonoBehaviourPunCallbacks {
 
     public override void OnConnectedToMaster() {
         // change UI
-        UIManager.instance.SetStatus(PhotonNetwork.IsConnected);
+         if (UIManager.instance == null) {
+            AddressablesManager.instance.LoadAddressableSceneAdditive(
+                "MainPlayerUI", 
+                delegate { 
+                    UIManager.instance.SetStatus(PhotonNetwork.IsConnected);
+                    PhotonNetwork.JoinLobby(); 
+                }
+            );
+        } else {
+            UIManager.instance.SetStatus(PhotonNetwork.IsConnected);
 
-        // join lobby
-        PhotonNetwork.JoinLobby();
+            // join lobby
+            PhotonNetwork.JoinLobby();
+        }
     }
     public override void OnJoinedLobby() {
         Debug.Log("Joined lobby");

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIManager : MonoBehaviour {
@@ -11,6 +12,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public GameObject connectingLabel, connectedLabel;
+    public Image healthProgressbar,staminaProgressbar, thirstProgressbar, hungerPorgressbar, sleepProgressbar;
 
 
     public void SetStatus(bool isConnectedToServer) {
@@ -21,5 +23,9 @@ public class UIManager : MonoBehaviour {
             connectingLabel.SetActive(true);
             connectedLabel.SetActive(false);
         }
+    }
+
+    public void SetHealthProgressbar(float aRate) {
+        healthProgressbar.fillAmount = aRate;
     }
 }
