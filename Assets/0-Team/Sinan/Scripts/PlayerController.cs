@@ -218,6 +218,14 @@ public class PlayerController : MonoBehaviour
         fire = Input.GetAxis("Fire1");
         if (fire>0) {
             weaponManager.Fire();
+            photonView.RPC("FireOnClones", RpcTarget.Others);
         }
     }
+
+    [PunRPC]
+    private void FireOnClones() {
+        weaponManager.Fire();
+    }
+
+
 }
