@@ -11,23 +11,27 @@ public class TerrainChunkLoader : MonoBehaviour {
     
     private void OnTriggerEnter(Collider other) {
         if (other.tag=="Player") {
-            if (IsEntryVectorInSameDirectionWithMyForward(other.transform)) {
-                // if (OnEnteryVectorInSameDirectionWithMyForward!=null) {
-                //     OnEnteryVectorInSameDirectionWithMyForward.Invoke();
-                // }
-                OnEnteryVectorInSameDirectionWithMyForward?.Invoke();
-            } else {
-                OnEnteryVectorInOppositeDirectionWithMyForward?.Invoke();
+            if (other.GetComponent<PlayerController>() && other.GetComponent<PlayerController>().isPlayerInstance) {
+                if (IsEntryVectorInSameDirectionWithMyForward(other.transform)) {
+                    // if (OnEnteryVectorInSameDirectionWithMyForward!=null) {
+                    //     OnEnteryVectorInSameDirectionWithMyForward.Invoke();
+                    // }
+                    OnEnteryVectorInSameDirectionWithMyForward?.Invoke();
+                } else {
+                    OnEnteryVectorInOppositeDirectionWithMyForward?.Invoke();
+                }
             }
         }
     }
 
     private void OnTriggerExit(Collider other) {
         if (other.tag=="Player") {
-            if (IsEntryVectorInSameDirectionWithMyForward(other.transform)) {
-                OnExitVectorInSameDirectionWithMyForward?.Invoke();
-            } else {
-                OnExitVectorInOppositeDirectionWithMyForward?.Invoke();
+            if (other.GetComponent<PlayerController>() && other.GetComponent<PlayerController>().isPlayerInstance) {
+                if (IsEntryVectorInSameDirectionWithMyForward(other.transform)) {
+                    OnExitVectorInSameDirectionWithMyForward?.Invoke();
+                } else {
+                    OnExitVectorInOppositeDirectionWithMyForward?.Invoke();
+                }
             }
         }
     }
