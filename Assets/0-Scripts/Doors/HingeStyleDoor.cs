@@ -7,11 +7,15 @@ public class HingeStyleDoor : MonoBehaviour {
     private IEnumerator animationCoroutine;
 
     private void OnTriggerEnter(Collider other) {
-        AnimateDoor(true);
+        if (other.GetComponent<PlayerController>().isPlayerInstance) {
+            AnimateDoor(true);
+        }
     }
 
     private void OnTriggerExit(Collider other) {
-        AnimateDoor(false);
+        if (other.GetComponent<PlayerController>().isPlayerInstance) {
+            AnimateDoor(false);
+        }
     }
 
     private void AnimateDoor(bool shouldOpen) {
