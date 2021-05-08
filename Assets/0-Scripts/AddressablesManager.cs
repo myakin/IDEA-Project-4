@@ -99,6 +99,60 @@ public class AddressablesManager : MonoBehaviour {
     }
 
 
+
+
+
+    public Dictionary<string, AsyncOperationHandle> recordOfUsedHandles = new Dictionary<string, AsyncOperationHandle>();
+    public Dictionary<AsyncOperationHandle, int> countOfHandleUses = new Dictionary<AsyncOperationHandle, int>();
+    public delegate void OnObjectLoaded<T>(T loadedObject, string addressableKey, int returningIndex);
+    public void LoadAnyTypeAddressable<T>(string key, OnObjectLoaded<T> onObjectLoaded, int anIndex = 0) {
+        if (recordOfUsedHandles.ContainsKey(key)) {
+            T obj = (T)recordOfUsedHandles[key].Result;
+            onObjectLoaded(obj, key, anIndex);
+        } else {
+            StartCoroutine(LoadAnyTypeAddressableCoroutine(key, onObjectLoaded, anIndex));
+        }
+    }
+
+    private IEnumerator LoadAnyTypeAddressableCoroutine<T>(string key, OnObjectLoaded<T> onObjectLoaded, int anIndex = 0) {
+        AsyncOperationHandle<T> op = Addressables.LoadAssetAsync<T>(key);
+        yield return op;
+        if (op.Status == AsyncOperationStatus.Succeeded) {
+            T obj = op.Result;
+
+            if (!recordOfUsedHandles.ContainsKey(key)) {
+                recordOfUsedHandles.Add(key, op);
+            }
+            if (!countOfHandleUses.ContainsKey(op)) {
+                countOfHandleUses.Add(op, 0);
+            }
+            countOfHandleUses[op]++;
+
+            onObjectLoaded(obj, key, anIndex);
+        }
+    }
+
+    public void ReleaseAddressableLoadedByAnyTypeMethod(string key) {
+        if (recordOfUsedHandles.ContainsKey(key)) {
+            AsyncOperationHandle op = recordOfUsedHandles[key];
+            countOfHandleUses[op]--;
+            if (countOfHandleUses[op]==0) {
+                Addressables.Release(op);
+                recordOfUsedHandles.Remove(key);
+                countOfHandleUses.Remove(op);
+            }
+        } else {
+            Debug.LogWarning("ReleaseAddressableLoadedByAnyTypeMethod(string key) received a key that does not exist in the system.");
+        }
+    }
+
+
+
+
+
+
+
+
     public delegate void PostSceneOperation();
     private List<string> loadingScenes = new List<string>();
     private List<string> loadedScenes = new List<string>();

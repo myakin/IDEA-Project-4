@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Icons
+  m_EditorClassIdentifier: 
+  m_GroupName: Icons
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 8dc72e1c5ce2f7b489abeb213ded18af
+  m_SerializeEntries:
+  - m_GUID: 113bfa57de543f648872f2da5633c612
+    m_Address: KnifeIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: 113bfa57de543f648872f2da5633c612, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 113bfa57de543f648872f2da5633c612, type: 3}
+  - m_GUID: 87b67e86c308e4c47bd052c2583f7a3a
+    m_Address: RifleIcon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: 87b67e86c308e4c47bd052c2583f7a3a, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 87b67e86c308e4c47bd052c2583f7a3a, type: 3}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6aa6aadec0db72247b46568e5fc970ca, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 5b8f4f60a4cfb62419343208fcd8381a, type: 2}
+    - {fileID: 11400000, guid: e339f5f8ba5808545b1a8edd7cb84916, type: 2}
