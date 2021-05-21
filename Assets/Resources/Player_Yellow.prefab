@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 4487348095744390443}
   - component: {fileID: -5852681323701463429}
   - component: {fileID: 217964516070511840}
+  - component: {fileID: 9116686441006589760}
   m_Layer: 0
   m_Name: Player_Yellow
   m_TagString: Player
@@ -471,6 +472,18 @@ MonoBehaviour:
   currentHealth: 100
   maxHealth: 100
   isDead: 0
+--- !u!114 &9116686441006589760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4800173755898535298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9cf022a57557a74d9141782cb8971bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6528742750370411492
 GameObject:
   m_ObjectHideFlags: 0

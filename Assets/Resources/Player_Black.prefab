@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 1547785136514437666}
   - component: {fileID: -4941680907235692731}
   - component: {fileID: 6052802636700961715}
+  - component: {fileID: 4148468598571527038}
   m_Layer: 0
   m_Name: Player_Black
   m_TagString: Player
@@ -441,6 +442,18 @@ MonoBehaviour:
   currentHealth: 100
   maxHealth: 100
   isDead: 0
+--- !u!114 &4148468598571527038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4800173755898535298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9cf022a57557a74d9141782cb8971bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5613554442574697651
 GameObject:
   m_ObjectHideFlags: 0

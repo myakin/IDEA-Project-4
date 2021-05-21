@@ -21,8 +21,14 @@ MonoBehaviour:
     m_Address: MainPlayerUI
     m_ReadOnly: 0
     m_SerializedLabels: []
-    m_MainAsset: {fileID: 102900000, guid: 5b0b53d4260d08749b3b49faa0b61c8c, type: 3}
-    m_TargetAsset: {fileID: 102900000, guid: 5b0b53d4260d08749b3b49faa0b61c8c, type: 3}
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: a05f8a3b8d0054543bf030f3959c7b2b
+    m_Address: InventoryUI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 102900000, guid: a05f8a3b8d0054543bf030f3959c7b2b, type: 3}
+    m_TargetAsset: {fileID: 102900000, guid: a05f8a3b8d0054543bf030f3959c7b2b, type: 3}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 6aa6aadec0db72247b46568e5fc970ca, type: 2}
   m_SchemaSet:
