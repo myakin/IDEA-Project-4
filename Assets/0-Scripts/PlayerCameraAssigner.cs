@@ -10,8 +10,10 @@ public class PlayerCameraAssigner : MonoBehaviour {
             cam.SetParent(cameraPositionDummy);
             cam.localPosition = Vector3.zero;
             cam.localRotation = Quaternion.identity;
-
             GetComponent<PlayerController>().playerCamera = cam;
+
+            cam.GetComponent<CameraFollow>().followTarget = cameraPositionDummy;
+            cam.GetComponent<CameraFollow>().byPass = false;
 
         }
         Destroy(this);

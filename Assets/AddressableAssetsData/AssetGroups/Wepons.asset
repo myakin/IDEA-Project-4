@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Wepons
+  m_EditorClassIdentifier: 
+  m_GroupName: Wepons
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 42cc876f8f1be34409eaacd6da2af7d6
+  m_SerializeEntries:
+  - m_GUID: 3befeddb42d7ed04cb4eabf11ce61c91
+    m_Address: G28 Rifle
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 1085448157036611611, guid: 3befeddb42d7ed04cb4eabf11ce61c91, type: 3}
+    m_TargetAsset: {fileID: 1085448157036611611, guid: 3befeddb42d7ed04cb4eabf11ce61c91, type: 3}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6aa6aadec0db72247b46568e5fc970ca, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 1a1c1c34a17a21748a018f639a05b78c, type: 2}
+    - {fileID: 11400000, guid: 483ce95d20dabbb43976101894d3fe40, type: 2}

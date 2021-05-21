@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public float sensitivity = 1f;
     public CapsuleCollider playerCollider;//Called from the health script.
     public bool isPlayerInstance;
+    public Transform weaponRestPositionDummy;
 
 
     private Animator animator;
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveDirection;
     private int indexSelector;
     private PhotonView photonView;
+    [SerializeField] private bool isUsingWeapon;
 
 
     private void Awake() {
@@ -68,14 +70,28 @@ public class PlayerController : MonoBehaviour
             // JumpFunction();
             // ControlDrag();
             // GroundDetectionSphereCast();
-            CameraMovement();
+            // CameraMovement();
             // slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
 
             hor = Input.GetAxis("Horizontal");
             ver = Input.GetAxis("Vertical");
-            transform.position+=(transform.forward * ver * moveSpeed + transform.right * hor * moveSpeed) * Time.deltaTime;
+            fire = Input.GetAxis("Fire1");
+            moveMultiplier = 1;
+            if (Input.GetKey(KeyCode.LeftShift)) {
+                moveMultiplier = 2;
+            }
 
-            Fire();
+            // transform.position+=(transform.forward * ver * moveSpeed + transform.right * hor * moveSpeed) * Time.deltaTime;
+            animator.SetFloat("vertical", ver * moveMultiplier);
+            animator.SetFloat("horizontal", hor * moveMultiplier);
+
+            mouseX += Input.GetAxis("Mouse X") * sensitivity;
+            transform.rotation = Quaternion.Euler(0f, mouseX, 0f);
+
+            if (fire>0) {
+                Fire();
+            }
+            
 
         }
     }
@@ -194,16 +210,20 @@ public class PlayerController : MonoBehaviour
             rb.velocity += jumpHeight * Vector3.up;
         }
     }
-    private void CameraMovement()
-    {
-        if (playerCamera) {
-            mouseX += Input.GetAxis("Mouse X") * sensitivity;
-            mouseY += Input.GetAxis("Mouse Y") * sensitivity;
-            mouseY = Mathf.Clamp(mouseY, -90f, 90f);
-            playerCamera.transform.localRotation = Quaternion.Euler(-mouseY, 0f, 0f);
-            transform.rotation = Quaternion.Euler(0f, mouseX, 0f);
-        }
-    }
+    // private void CameraMovement()
+    // {
+    //     if (playerCamera) {
+    //         if (playerCamera.parent!=null) {
+    //             playerCamera.SetParent(null);
+    //         }
+    //         playerCamera.position = -GetComponent<PlayerCameraAssigner>().cameraPositionDummy.forward * 3;
+    //         mouseX += Input.GetAxis("Mouse X") * sensitivity;
+    //         mouseY += Input.GetAxis("Mouse Y") * sensitivity;
+    //         mouseY = Mathf.Clamp(mouseY, -90f, 90f);
+    //         playerCamera.transform.localRotation = Quaternion.Euler(-mouseY, 0f, 0f);
+    //         transform.rotation = Quaternion.Euler(0f, mouseX, 0f);
+    //     }
+    // }
     //We use this to check if the player is falling
     // private void OnCollisionExit(Collision collision)
     // {
@@ -215,8 +235,7 @@ public class PlayerController : MonoBehaviour
     // }
 
     public void Fire() {
-        fire = Input.GetAxis("Fire1");
-        if (fire>0) {
+        if (weaponManager!=null && isUsingWeapon) {
             weaponManager.Fire();
             photonView.RPC("FireOnClones", RpcTarget.Others);
         }

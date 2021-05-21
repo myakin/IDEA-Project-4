@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WeaponLoader : MonoBehaviour {
+    public Transform weaponRestPositionDummy;
+
+    private void Start() {
+        LoadLastWeapon();
+    }
+
+    public void LoadLastWeapon(string aWeaponName = "") {
+        string weaponToLoad = aWeaponName;
+        if (string.IsNullOrEmpty(weaponToLoad)) {
+            weaponToLoad = "G28 Rifle"; // default weapon
+        }
+        AddressablesManager.instance.SpawnObject(
+            weaponToLoad,
+            weaponRestPositionDummy.position,
+            weaponRestPositionDummy.rotation,
+            weaponRestPositionDummy,
+            delegate (GameObject obj) {
+                GetComponent<PlayerController>().weaponManager = obj.GetComponent<WeaponManager>();
+            }
+        );
+    }
+}
