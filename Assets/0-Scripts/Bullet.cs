@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour {
     }
     private void DetectCollision() {
         RaycastHit hit;
-        if (Physics.Raycast(raycastDummy.position, raycastDummy.forward, out hit, 0.2f, 1<<0, QueryTriggerInteraction.Ignore)) {
+        if (Physics.Raycast(raycastDummy.position, raycastDummy.forward, out hit, 0.2f, 1<<0 | 1<<7, QueryTriggerInteraction.Ignore)) {
             Debug.Log(hit.collider.name);
             if (hit.collider.gameObject.GetComponent<Health>()) {
                 hit.collider.gameObject.GetComponent<Health>().ModifyHealth(damage);
