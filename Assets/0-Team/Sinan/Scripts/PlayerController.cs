@@ -24,15 +24,16 @@ public class PlayerController : MonoBehaviour
     public float sphereMaxDistance;
     public LayerMask groundMask;
 
-    [Header("Weapon Manager")]
+    [Header("Weapon Related")]
     public WeaponManager weaponManager;
+    public Transform rifleOnUseDummy, weaponRestPositionDummy;
 
     [Header("Misc")]
     public Transform playerCamera;
     public float sensitivity = 1f;
     public CapsuleCollider playerCollider;//Called from the health script.
     public bool isPlayerInstance;
-    public Transform weaponRestPositionDummy;
+    
 
 
     private Animator animator;
@@ -46,6 +47,7 @@ public class PlayerController : MonoBehaviour
     private int indexSelector;
     private PhotonView photonView;
     [SerializeField] private bool isUsingWeapon;
+    [SerializeField] public bool isUsingRifle;
 
 
     private void Awake() {
@@ -76,6 +78,31 @@ public class PlayerController : MonoBehaviour
             hor = Input.GetAxis("Horizontal");
             ver = Input.GetAxis("Vertical");
             fire = Input.GetAxis("Fire1");
+
+            if (Input.GetKeyDown(KeyCode.Alpha1)) {
+                if (weaponManager!=null) {
+                    if (!isUsingRifle) {
+                        isUsingRifle = true;
+                        isUsingWeapon = true;
+                        animator.SetBool("isUsingRifle", true);
+                        weaponManager.transform.SetParent(rifleOnUseDummy);
+                        weaponManager.transform.localPosition = Vector3.zero;
+                        weaponManager.transform.localRotation = Quaternion.identity;
+                        
+                    } else {
+                        isUsingRifle = false;
+                        isUsingWeapon = false;
+                        animator.SetBool("isUsingRifle", false);
+                        weaponManager.transform.SetParent(weaponRestPositionDummy);
+                        weaponManager.transform.localPosition = Vector3.zero;
+                        weaponManager.transform.localRotation = Quaternion.identity;
+                        
+                    }
+                } else {
+                    Debug.Log("You don't have any rifle to use");
+                }
+            }
+
             moveMultiplier = 1;
             if (Input.GetKey(KeyCode.LeftShift)) {
                 moveMultiplier = 2;
