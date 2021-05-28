@@ -516,6 +516,7 @@ MonoBehaviour:
   isPlayerInstance: 0
   isUsingWeapon: 0
   isUsingRifle: 0
+  doFire: 0
 --- !u!54 &563249120
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -602,6 +603,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 2
     Name: isUsingRifle
+  - Type: 4
+    SynchronizeType: 2
+    Name: isFiring
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0

@@ -47,7 +47,8 @@ public class PlayerController : MonoBehaviour
     private int indexSelector;
     private PhotonView photonView;
     [SerializeField] private bool isUsingWeapon;
-    [SerializeField] public bool isUsingRifle;
+    [SerializeField] private bool isUsingRifle;
+    public bool doFire;
 
 
     private void Awake() {
@@ -116,10 +117,16 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, mouseX, 0f);
 
             if (fire>0) {
+                doFire=true;
+            }
+
+            if (doFire) {
                 Fire();
             }
-            
-
+        } else {
+            if (doFire) {
+                Fire();
+            }
         }
     }
     // private void FixedUpdate()
@@ -131,10 +138,12 @@ public class PlayerController : MonoBehaviour
         if (stream.IsWriting) {
             stream.SendNext(isUsingRifle);
             stream.SendNext(isUsingWeapon);
+            stream.SendNext(doFire);
 
         } else if (stream.IsReading) {
             isUsingRifle = (bool) stream.ReceiveNext();
             isUsingWeapon = (bool) stream.ReceiveNext();
+            doFire = (bool) stream.ReceiveNext();
         }
     }
 
@@ -276,6 +285,7 @@ public class PlayerController : MonoBehaviour
     public void Fire() {
         if (weaponManager!=null && isUsingWeapon) {
             weaponManager.Fire();
+            doFire = false;
             photonView.RPC("FireOnClones", RpcTarget.Others);
         }
     }
