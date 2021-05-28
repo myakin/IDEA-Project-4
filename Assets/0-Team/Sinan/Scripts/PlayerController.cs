@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour
                         weaponManager.transform.SetParent(weaponRestPositionDummy);
                         weaponManager.transform.localPosition = Vector3.zero;
                         weaponManager.transform.localRotation = Quaternion.identity;
-                        
+
                     }
                 } else {
                     Debug.Log("You don't have any rifle to use");
@@ -126,6 +126,18 @@ public class PlayerController : MonoBehaviour
     // {
     //     Movement();
     // }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
+        if (stream.IsWriting) {
+            stream.SendNext(isUsingRifle);
+            stream.SendNext(isUsingWeapon);
+
+        } else if (stream.IsReading) {
+            isUsingRifle = (bool) stream.ReceiveNext();
+            isUsingWeapon = (bool) stream.ReceiveNext();
+        }
+    }
+
     private void GroundDetectionSphereCast()
     {
         //This checks if the player is grounded, if the player is grounded they can jump again
