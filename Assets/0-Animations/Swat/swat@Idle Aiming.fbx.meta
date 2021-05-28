@@ -1,52 +1,12 @@
 fileFormatVersion: 2
-guid: 0d438e691615fd24490864830f633094
+guid: 15f2d6b29f43fee449b3c80ead0f484d
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: mixamo.com
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Soldier_body1
-    second: {fileID: 2100000, guid: 0e17938fdc81b714ca08739e68425c60, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Soldier_head6
-    second: {fileID: 2100000, guid: 6cd4be106800e56469e8345ed8c92a22, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Soldier_Body_diffuse
-    second: {fileID: 2800000, guid: 89839a96c519d784e9ae9255133032b8, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Soldier_Body_normal
-    second: {fileID: 2800000, guid: d47683040f6aebf4cbb184e6d09b100d, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Soldier_Body_specular
-    second: {fileID: 2800000, guid: dba68dbbcbfc0bd44a0e1adbc17116ad, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Soldier_head_diffuse
-    second: {fileID: 2800000, guid: ca3027641f1e9df41b1a8305e486da6a, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Soldier_head_normal
-    second: {fileID: 2800000, guid: 06d178296b2eee14187b94d46e95a0b0, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Soldier_head_specular
-    second: {fileID: 2800000, guid: 7d98c9d24a0aed24885a9033a3c979d5, type: 3}
+    second: Idle Aiming
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -66,14 +26,43 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle Aiming
+      takeName: mixamo.com
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 63
+      wrapMode: 0
+      orientationOffsetY: -45.8
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -82,10 +71,10 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    importVisibility: 0
+    importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -115,57 +104,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 105eff4e1c19f4b418c9663c0f414143
-  - ee24cdb760e664a4eb18a5dbffd2e20d
-  - 2c83e3ff48800504f8acb98fc0c013da
-  - d88bfbedf2ec41a46afd09216a1eb192
-  - 8a7b96897c4731c418c4985a3ec45d74
-  - f85e543270286e841a69d7114cd0280e
-  - e19d1e689628dd44f922f170c9a6e876
-  - 15f2d6b29f43fee449b3c80ead0f484d
-  - 2b0b8efb81324244ba86adf6644c20d7
-  - 1c080ef113e53ba4bbfbaa4021212359
-  - 93b0233d898cf6e46921354cf010451d
-  - e315faec57f2ee347a37346f7456e66c
-  - 2d77e31db64ec7b4c8282fad0f06bc00
-  - f5cf8a51fa0630049b3066494c134b24
-  - 0aa20da05f7ba174e9fb28d64b8fb962
-  - 191a24f57ac57ba48a3e75e69f4cdedb
-  - 7d8b3d9702d9b8944bbe015e97319007
-  - cce3095513d58024a9482b7adc879f65
-  - 9723153859ad9934f80822cba5ffffc0
-  - 3e628a3a650569647bf6236c4f7e143e
-  - 51c077b99034665488e1a129e4ad49c6
-  - 4587e7bb2bd36274b8d62dfcfbb6eb21
-  - d79fb12d877a8c2409ad165580266ca2
-  - 426900c427551c1419edcf0ab68c1670
-  - 97a04acf038e0cf4391d92f1fa88c8f6
-  - 7bf9249e234419941b3bf6fac8c6b1bf
-  - 86c7e2acb99ba8c4ea9b93654e182867
-  - 58eaa80a2ddb12e449cf2139a02a11ad
-  - 35d72f41545f0bf40b9c36bc47304c12
-  - 367243962e8b1ae4587b85a56614c582
-  - 62833a2aedae6ad46b199bb12f117158
-  - 6d800fecb48e2414c828cd48823f96ca
-  - f996669b3ddf435458c9fdc910766d64
-  - 415925758ada0574a9c21076f9f447b0
-  - 9ce2cb37b6f5086438166ac003f8f862
-  - de7b21107635a5744b0d24f01ef7f4ce
-  - b32fb4fff70d02a46832b90611f33ff6
-  - 55e00bafd81f65e43b82d476ded28aec
-  - d2643443b56a63540a145f8956747258
-  - 83e58501cabc8b84d99ded988e99f533
-  - 1ff36de70a3022140834fc20c0e93ea2
-  - 762e71b5ae5bb304890dccef493f3626
-  - 8ab673d65c7c98d4a80a27cd12e1da03
-  - 66922da49911da9459c3de13fa9bfea4
-  - 732c48ca7f13c504ab63d4fa2a8758e2
-  - 8be37c97c6731d64fa46600a64b8f923
-  - ec850bb79372c94459ee68e26ac40879
-  - 85148adb97fafba4a9096bb54e06bd1f
-  - d464d8c9c84110d4ca26b1d779f2978c
-  - cb224d152f5b6d64383254e66d1558ec
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
@@ -988,11 +927,11 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 0d438e691615fd24490864830f633094, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
