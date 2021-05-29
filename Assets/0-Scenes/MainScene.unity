@@ -1129,11 +1129,13 @@ MonoBehaviour:
   followTarget: {fileID: 0}
   followDistance: 3
   followUpOffset: 0.5
+  rightOffset: 0
   sensitivity: 1
   dampening: 0.1
   collisionSphereRadius: 0.5
   useCalculationStyleCorrection: 0
   byPass: 1
+  shakeCam: 0
 --- !u!114 &1618067613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1185,7 +1187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1843611508
 AudioListener:
   m_ObjectHideFlags: 0

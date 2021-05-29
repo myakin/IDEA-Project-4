@@ -24,19 +24,34 @@ public class AddressablesManager : MonoBehaviour {
     }
 
 
-    private Queue<string> requests = new Queue<string>();
+    private Queue<SpawnRequest> requests = new Queue<SpawnRequest>();
     private Dictionary<string, GameObject> keysAndObjectsInMemory = new Dictionary<string, GameObject>();
     private Dictionary<string, AsyncOperationHandle> keysAndOpHandles = new Dictionary<string, AsyncOperationHandle>();
     private Dictionary<string, int> keysAndObjectCounts = new Dictionary<string, int>();
     public delegate void OnSpawnObject(GameObject anObject);
 
+    struct SpawnRequest {
+        public string addressableKey;
+        public Vector3 spawnPosition;
+        public Quaternion spawnRotation;
+        public Transform parent;
+        public OnSpawnObject onSpawn;
+
+        public SpawnRequest(string addressableKey, Vector3 spawnPosition, Quaternion spawnRotation, Transform aParent, OnSpawnObject onSpawn) {
+            this.addressableKey = addressableKey;
+            this.spawnPosition = spawnPosition;
+            this.spawnRotation = spawnRotation;
+            this.parent = aParent;
+            this.onSpawn = onSpawn;
+        }
+    }
 
     private IEnumerator addressableObjectLoadingCoroutine;
 
+    
     public void SpawnObject(string addressableKey, Vector3 spawnPosition, Quaternion spawnRotation, Transform aParent, OnSpawnObject onSpawn)
     {
-        requests.Enqueue(addressableKey);
-
+        requests.Enqueue(new SpawnRequest(addressableKey, spawnPosition, spawnRotation, aParent, onSpawn));
         if (addressableObjectLoadingCoroutine==null)
         {
             addressableObjectLoadingCoroutine = AddressableObjectLoadingCoroutine(addressableKey, spawnPosition, spawnRotation, aParent, onSpawn);
@@ -51,31 +66,31 @@ public class AddressablesManager : MonoBehaviour {
         {
             if (keysAndObjectsInMemory.ContainsKey(addressableKey))
             {
-                GameObject obj = Instantiate(keysAndObjectsInMemory[addressableKey], spawnPosition, spawnRotation, aParent);
+                SpawnRequest request = requests.Dequeue();
+                GameObject obj = Instantiate(keysAndObjectsInMemory[request.addressableKey], request.spawnPosition, request.spawnRotation, request.parent);
                 obj.AddComponent<AddressableObjectOnDestroy>().addressableKey = addressableKey;
                 keysAndObjectCounts[addressableKey]++;
-                requests.Dequeue();
-                onSpawn(obj);
+                
+                request.onSpawn(obj);
             }
             else
             {
-                AsyncOperationHandle<GameObject> op = Addressables.LoadAssetAsync<GameObject>(addressableKey);
+                SpawnRequest request = requests.Dequeue();
+                AsyncOperationHandle<GameObject> op = Addressables.LoadAssetAsync<GameObject>(request.addressableKey);
                 yield return op;
 
                 if (op.Status == AsyncOperationStatus.Succeeded)
                 {
                     GameObject objectInMemory = op.Result;
-                    keysAndObjectsInMemory.Add(addressableKey, objectInMemory);
-                    keysAndObjectCounts.Add(addressableKey, 1);
+                    keysAndObjectsInMemory.Add(request.addressableKey, objectInMemory);
+                    keysAndObjectCounts.Add(request.addressableKey, 1);
 
-                    GameObject obj = Instantiate(objectInMemory, spawnPosition, spawnRotation, aParent);
+                    GameObject obj = Instantiate(objectInMemory, request.spawnPosition, request.spawnRotation, request.parent);
                     obj.AddComponent<AddressableObjectOnDestroy>().addressableKey = addressableKey;
                     
-                    keysAndOpHandles.Add(addressableKey, op);
+                    keysAndOpHandles.Add(request.addressableKey, op);
 
-                    requests.Dequeue();
-
-                    onSpawn(obj);
+                    request.onSpawn(obj);
 
                 }
             }

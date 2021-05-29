@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isUsingWeapon;
     [SerializeField] private bool isUsingRifle;
     public bool doFire;
+    private bool isWeaponPlacedOnActivePosition;
 
 
     private void Awake() {
@@ -63,10 +64,14 @@ public class PlayerController : MonoBehaviour
         playerCollider = GetComponent<CapsuleCollider>();
         Cursor.lockState = CursorLockMode.Locked;
         weaponManager = GetComponentInChildren<WeaponManager>();
+        if (isPlayerInstance) {
+            GetComponent<WeaponLoader>().LoadLastWeapon();
+            photonView.RPC("LoadWeaponOnClones", RpcTarget.OthersBuffered);
+        }
     }
     private void Update()
     {
-        if (isPlayerInstance) {
+        if (isPlayerInstance) { // executed on player instance
             // SprintFunction();
             // CrouchFunction();
             // MovementInput();
@@ -86,17 +91,18 @@ public class PlayerController : MonoBehaviour
                         isUsingRifle = true;
                         isUsingWeapon = true;
                         animator.SetBool("isUsingRifle", true);
-                        weaponManager.transform.SetParent(rifleOnUseDummy);
-                        weaponManager.transform.localPosition = Vector3.zero;
-                        weaponManager.transform.localRotation = Quaternion.identity;
+
+                        PutWeponOnActivePosition();
+                        // photonView.RPC("StatedToUseWeapon", RpcTarget.OthersBuffered);
+                        GetComponent<RpcCalls>().StartedToUseWeaponOnClones();
                         
                     } else {
                         isUsingRifle = false;
                         isUsingWeapon = false;
                         animator.SetBool("isUsingRifle", false);
-                        weaponManager.transform.SetParent(weaponRestPositionDummy);
-                        weaponManager.transform.localPosition = Vector3.zero;
-                        weaponManager.transform.localRotation = Quaternion.identity;
+                        PutWeaponInRestPosition();
+                        // photonView.RPC("EndedToUseWeapon", RpcTarget.OthersBuffered);
+                        GetComponent<RpcCalls>().EndUsingWeaponOnClones();
 
                     }
                 } else {
@@ -117,16 +123,16 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, mouseX, 0f);
 
             if (fire>0) {
-                doFire=true;
+                Fire();
+                // photonView.RPC("FireOnClones", RpcTarget.Others);
+                GetComponent<RpcCalls>().FireRPC();
             }
 
-            if (doFire) {
-                Fire();
-            }
-        } else {
-            if (doFire) {
-                Fire();
-            }
+            
+
+
+        } else { // runs on clones
+            
         }
     }
     // private void FixedUpdate()
@@ -134,18 +140,36 @@ public class PlayerController : MonoBehaviour
     //     Movement();
     // }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
-        if (stream.IsWriting) {
-            stream.SendNext(isUsingRifle);
-            stream.SendNext(isUsingWeapon);
-            stream.SendNext(doFire);
-
-        } else if (stream.IsReading) {
-            isUsingRifle = (bool) stream.ReceiveNext();
-            isUsingWeapon = (bool) stream.ReceiveNext();
-            doFire = (bool) stream.ReceiveNext();
-        }
+    public void PutWeaponInRestPosition() {
+        weaponManager.transform.SetParent(weaponRestPositionDummy);
+        weaponManager.transform.localPosition = Vector3.zero;
+        weaponManager.transform.localRotation = Quaternion.identity;
     }
+
+    public void PutWeponOnActivePosition() {
+        StartCoroutine(PutWeaponOnActivePositionCoroutine());
+    }
+    private IEnumerator PutWeaponOnActivePositionCoroutine() {
+        while (weaponManager==null) {
+            yield return null;
+        }
+        weaponManager.transform.SetParent(rifleOnUseDummy);
+        weaponManager.transform.localPosition = Vector3.zero;
+        weaponManager.transform.localRotation = Quaternion.identity;
+    }
+
+    // public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info) {
+    //     if (stream.IsWriting) {
+    //         stream.SendNext(isUsingRifle);
+    //         stream.SendNext(isUsingWeapon);
+    //         stream.SendNext(doFire);
+
+    //     } else if (stream.IsReading) {
+    //         isUsingRifle = (bool) stream.ReceiveNext();
+    //         isUsingWeapon = (bool) stream.ReceiveNext();
+    //         doFire = (bool) stream.ReceiveNext();
+    //     }
+    // }
 
     private void GroundDetectionSphereCast()
     {
@@ -285,15 +309,9 @@ public class PlayerController : MonoBehaviour
     public void Fire() {
         if (weaponManager!=null && isUsingWeapon) {
             weaponManager.Fire();
-            doFire = false;
-            photonView.RPC("FireOnClones", RpcTarget.Others);
         }
     }
 
-    [PunRPC]
-    private void FireOnClones() {
-        weaponManager.Fire();
-    }
-
+    
 
 }

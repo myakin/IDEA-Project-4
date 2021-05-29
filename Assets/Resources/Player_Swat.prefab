@@ -437,6 +437,7 @@ GameObject:
   - component: {fileID: 563249124}
   - component: {fileID: 563249125}
   - component: {fileID: 7933342585791330103}
+  - component: {fileID: 491928048051750591}
   m_Layer: 7
   m_Name: Player_Swat
   m_TagString: Untagged
@@ -679,6 +680,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponRestPositionDummy: {fileID: 416543944214392876}
+--- !u!114 &491928048051750591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214324410857759164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f0444e59b678f4d891dd56eca02781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1270810275915081806
 GameObject:
   m_ObjectHideFlags: 0

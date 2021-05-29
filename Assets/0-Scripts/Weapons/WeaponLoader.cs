@@ -5,9 +5,9 @@ using UnityEngine;
 public class WeaponLoader : MonoBehaviour {
     public Transform weaponRestPositionDummy;
 
-    private void Start() {
-        LoadLastWeapon();
-    }
+    // private void Start() {
+    //     LoadLastWeapon();
+    // }
 
     public void LoadLastWeapon(string aWeaponName = "") {
         string weaponToLoad = aWeaponName;
@@ -21,6 +21,9 @@ public class WeaponLoader : MonoBehaviour {
             weaponRestPositionDummy,
             delegate (GameObject obj) {
                 GetComponent<PlayerController>().weaponManager = obj.GetComponent<WeaponManager>();
+                obj.transform.SetParent(weaponRestPositionDummy);
+                obj.transform.localPosition = Vector3.zero;
+                obj.transform.localRotation = Quaternion.identity;
             }
         );
     }

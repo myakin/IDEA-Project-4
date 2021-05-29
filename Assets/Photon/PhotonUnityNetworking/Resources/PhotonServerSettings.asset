@@ -39,6 +39,10 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - FireOnClones
+  - LoadWeaponOnClones
+  - StatedToUseWeapon
+  - EndedToUseWeapon
+  - FireOnClone
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
