@@ -141,6 +141,8 @@ public class PlayerController : MonoBehaviour
     // }
 
     public void PutWeaponInRestPosition() {
+        isUsingRifle = false;
+        isUsingWeapon = false;
         weaponManager.transform.SetParent(weaponRestPositionDummy);
         weaponManager.transform.localPosition = Vector3.zero;
         weaponManager.transform.localRotation = Quaternion.identity;
@@ -153,6 +155,8 @@ public class PlayerController : MonoBehaviour
         while (weaponManager==null) {
             yield return null;
         }
+        isUsingRifle = true;
+        isUsingWeapon = true;
         weaponManager.transform.SetParent(rifleOnUseDummy);
         weaponManager.transform.localPosition = Vector3.zero;
         weaponManager.transform.localRotation = Quaternion.identity;

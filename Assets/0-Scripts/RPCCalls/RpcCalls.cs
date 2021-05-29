@@ -24,7 +24,7 @@ public class RpcCalls : MonoBehaviour
     }
 
     [PunRPC]
-    private void FireOnClone() {
+    private void FireOnClones() {
         GetComponent<PlayerController>().Fire();
     }
 

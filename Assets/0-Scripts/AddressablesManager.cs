@@ -51,51 +51,87 @@ public class AddressablesManager : MonoBehaviour {
     
     public void SpawnObject(string addressableKey, Vector3 spawnPosition, Quaternion spawnRotation, Transform aParent, OnSpawnObject onSpawn)
     {
-        requests.Enqueue(new SpawnRequest(addressableKey, spawnPosition, spawnRotation, aParent, onSpawn));
-        if (addressableObjectLoadingCoroutine==null)
-        {
-            addressableObjectLoadingCoroutine = AddressableObjectLoadingCoroutine(addressableKey, spawnPosition, spawnRotation, aParent, onSpawn);
-            StartCoroutine(addressableObjectLoadingCoroutine);
-        }
-       
+        // requests.Enqueue(new SpawnRequest(addressableKey, spawnPosition, spawnRotation, aParent, onSpawn));
+        // if (addressableObjectLoadingCoroutine==null)
+        // {
+        //     addressableObjectLoadingCoroutine = AddressableObjectLoadingCoroutine(addressableKey, spawnPosition, spawnRotation, aParent, onSpawn);
+        //     StartCoroutine(addressableObjectLoadingCoroutine);
+        // }
 
+        if (keysAndObjectsInMemory.ContainsKey(addressableKey)) {
+            // Debug.Log("Getting from pre-loaded sample");
+            GameObject obj = Instantiate(keysAndObjectsInMemory[addressableKey], spawnPosition, spawnRotation, aParent);
+            obj.AddComponent<AddressableObjectOnDestroy>().addressableKey = addressableKey;
+            keysAndObjectCounts[addressableKey]++;
+            onSpawn(obj);
+        } else {
+            StartCoroutine(AddressableObjectLoadingCoroutine(addressableKey, spawnPosition, spawnRotation, aParent, onSpawn));
+        }
     }
-    private IEnumerator AddressableObjectLoadingCoroutine(string addressableKey, Vector3 spawnPosition, Quaternion spawnRotation, Transform aParent, OnSpawnObject onSpawn)
-    {
-        while (requests.Count > 0)
-        {
-            if (keysAndObjectsInMemory.ContainsKey(addressableKey))
-            {
-                SpawnRequest request = requests.Dequeue();
-                GameObject obj = Instantiate(keysAndObjectsInMemory[request.addressableKey], request.spawnPosition, request.spawnRotation, request.parent);
-                obj.AddComponent<AddressableObjectOnDestroy>().addressableKey = addressableKey;
-                keysAndObjectCounts[addressableKey]++;
+    private IEnumerator AddressableObjectLoadingCoroutine(string addressableKey, Vector3 spawnPosition, Quaternion spawnRotation, Transform aParent, OnSpawnObject onSpawn) {
+        // while (requests.Count > 0)
+        // {
+        //     if (keysAndObjectsInMemory.ContainsKey(addressableKey))
+        //     {
+        //         SpawnRequest request = requests.Dequeue();
+        //         GameObject obj = Instantiate(keysAndObjectsInMemory[request.addressableKey], request.spawnPosition, request.spawnRotation, request.parent);
+        //         obj.AddComponent<AddressableObjectOnDestroy>().addressableKey = addressableKey;
+        //         keysAndObjectCounts[addressableKey]++;
                 
-                request.onSpawn(obj);
-            }
-            else
-            {
-                SpawnRequest request = requests.Dequeue();
-                AsyncOperationHandle<GameObject> op = Addressables.LoadAssetAsync<GameObject>(request.addressableKey);
-                yield return op;
+        //         request.onSpawn(obj);
+        //     }
+        //     else
+        //     {
+        //         SpawnRequest request = requests.Dequeue();
+        //         AsyncOperationHandle<GameObject> op = Addressables.LoadAssetAsync<GameObject>(request.addressableKey);
+        //         yield return op;
 
-                if (op.Status == AsyncOperationStatus.Succeeded)
-                {
-                    GameObject objectInMemory = op.Result;
-                    keysAndObjectsInMemory.Add(request.addressableKey, objectInMemory);
-                    keysAndObjectCounts.Add(request.addressableKey, 1);
+        //         if (op.Status == AsyncOperationStatus.Succeeded)
+        //         {
+        //             GameObject objectInMemory = op.Result;
+        //             keysAndObjectsInMemory.Add(request.addressableKey, objectInMemory);
+        //             keysAndObjectCounts.Add(request.addressableKey, 1);
 
-                    GameObject obj = Instantiate(objectInMemory, request.spawnPosition, request.spawnRotation, request.parent);
-                    obj.AddComponent<AddressableObjectOnDestroy>().addressableKey = addressableKey;
+        //             GameObject obj = Instantiate(objectInMemory, request.spawnPosition, request.spawnRotation, request.parent);
+        //             obj.AddComponent<AddressableObjectOnDestroy>().addressableKey = addressableKey;
                     
-                    keysAndOpHandles.Add(request.addressableKey, op);
+        //             keysAndOpHandles.Add(request.addressableKey, op);
 
-                    request.onSpawn(obj);
+        //             request.onSpawn(obj);
 
-                }
+        //         }
+        //     }
+        // }
+        // addressableObjectLoadingCoroutine = null;
+
+        // Debug.Log("Getting from archieve");
+        string key = addressableKey;
+        Vector3 sp = spawnPosition;
+        Quaternion sr = spawnRotation;
+        Transform p = aParent;
+        OnSpawnObject os = onSpawn;
+
+        AsyncOperationHandle<GameObject> op = Addressables.LoadAssetAsync<GameObject>(key);
+        yield return op;
+
+        if (op.Status == AsyncOperationStatus.Succeeded) {
+            GameObject objectInMemory = op.Result;
+            if (!keysAndObjectsInMemory.ContainsKey(key)){
+                keysAndObjectsInMemory.Add(key, objectInMemory);
+                keysAndObjectCounts.Add(key, 1);
+            } else {
+                keysAndObjectCounts[key]++;
             }
+
+            GameObject obj = Instantiate(objectInMemory, sp, sr, p);
+            obj.AddComponent<AddressableObjectOnDestroy>().addressableKey = key;
+
+            os(obj);
+            
+            if (!keysAndOpHandles.ContainsKey(key))
+                keysAndOpHandles.Add(key, op);
+
         }
-        addressableObjectLoadingCoroutine = null;
     }
 
     public void ReleaseAddressableObject(string addressableKey)
