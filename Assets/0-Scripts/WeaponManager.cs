@@ -9,6 +9,7 @@ public class WeaponManager : MonoBehaviour {
     public float range = 100;
     public float bulletSpeed = 1;
     public float maxDamage = 1.5f;
+    public ParticleSystem blowEffect;
     
 
     private bool isPermittedToGenerateBullet = true;
@@ -26,6 +27,8 @@ public class WeaponManager : MonoBehaviour {
                     ReleaseFiringConstrains();
                 }
             ); 
+
+            blowEffect.Play();
         } 
     }
 
