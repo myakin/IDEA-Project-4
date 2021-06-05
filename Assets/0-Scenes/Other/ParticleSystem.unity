@@ -10456,5 +10456,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: G28 Rifle_PaintBall
       objectReference: {fileID: 0}
+    - target: {fileID: 9011804544334420256, guid: e8f54ac07745b8e489e5fb22be9b7e16, type: 3}
+      propertyPath: ForceModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9011804544334420256, guid: e8f54ac07745b8e489e5fb22be9b7e16, type: 3}
+      propertyPath: ForceModule.y.scalar
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8f54ac07745b8e489e5fb22be9b7e16, type: 3}
