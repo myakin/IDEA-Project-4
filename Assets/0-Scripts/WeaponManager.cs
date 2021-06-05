@@ -10,6 +10,7 @@ public class WeaponManager : MonoBehaviour {
     public float bulletSpeed = 1;
     public float maxDamage = 1.5f;
     public ParticleSystem blowEffect;
+    public bool isPaintballRifle;
     
 
     private bool isPermittedToGenerateBullet = true;
@@ -17,16 +18,20 @@ public class WeaponManager : MonoBehaviour {
     public void Fire() {
         if (isPermittedToGenerateBullet) {
             isPermittedToGenerateBullet = false;
-            AddressablesManager.instance.SpawnObject(
-                bulletPrefabName, 
-                bulletGenerationPointDummy.position, 
-                bulletGenerationPointDummy.rotation, 
-                null, 
-                delegate(GameObject anobject) { 
-                    anobject.GetComponent<Bullet>().Initiate(range, bulletSpeed, -Random.Range(0.3f, maxDamage));
-                    ReleaseFiringConstrains();
-                }
-            ); 
+            if (!isPaintballRifle) {
+                AddressablesManager.instance.SpawnObject(
+                    bulletPrefabName, 
+                    bulletGenerationPointDummy.position, 
+                    bulletGenerationPointDummy.rotation, 
+                    null, 
+                    delegate(GameObject anobject) { 
+                        anobject.GetComponent<Bullet>().Initiate(range, bulletSpeed, -Random.Range(0.3f, maxDamage));
+                        ReleaseFiringConstrains();
+                    }
+                ); 
+            } else {
+                GetComponentInChildren<ParticleSystemShot>().Fire(-Random.Range(0.3f, maxDamage));
+            }
 
             blowEffect.Play();
         } 
