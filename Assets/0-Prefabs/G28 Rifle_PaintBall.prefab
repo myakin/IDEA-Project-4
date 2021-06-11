@@ -154,6 +154,7 @@ MonoBehaviour:
   bulletSpeed: 1
   maxDamage: 1.5
   blowEffect: {fileID: 2172765173229447382}
+  isPaintballRifle: 1
 --- !u!1 &9011804545353212655
 GameObject:
   m_ObjectHideFlags: 0

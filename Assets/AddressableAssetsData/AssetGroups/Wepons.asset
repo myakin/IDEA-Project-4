@@ -23,6 +23,12 @@ MonoBehaviour:
     m_SerializedLabels: []
     m_MainAsset: {fileID: 1085448157036611611, guid: 3befeddb42d7ed04cb4eabf11ce61c91, type: 3}
     m_TargetAsset: {fileID: 1085448157036611611, guid: 3befeddb42d7ed04cb4eabf11ce61c91, type: 3}
+  - m_GUID: e8f54ac07745b8e489e5fb22be9b7e16
+    m_Address: G28 Rifle_PaintBall
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 8214588971938627601, guid: e8f54ac07745b8e489e5fb22be9b7e16, type: 3}
+    m_TargetAsset: {fileID: 8214588971938627601, guid: e8f54ac07745b8e489e5fb22be9b7e16, type: 3}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 6aa6aadec0db72247b46568e5fc970ca, type: 2}
   m_SchemaSet:

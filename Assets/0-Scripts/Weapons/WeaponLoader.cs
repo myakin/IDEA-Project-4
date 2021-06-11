@@ -12,7 +12,7 @@ public class WeaponLoader : MonoBehaviour {
     public void LoadLastWeapon(string aWeaponName = "") {
         string weaponToLoad = aWeaponName;
         if (string.IsNullOrEmpty(weaponToLoad)) {
-            weaponToLoad = "G28 Rifle"; // default weapon
+            weaponToLoad = "G28 Rifle_PaintBall"; // default weapon
         }
         AddressablesManager.instance.SpawnObject(
             weaponToLoad,
