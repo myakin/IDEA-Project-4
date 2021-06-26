@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Trees
+  m_EditorClassIdentifier: 
+  m_GroupName: Trees
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 8d9f82447e3eee54c9298209fec41357
+  m_SerializeEntries:
+  - m_GUID: e96a88a812a24164ba96b13dc2d61f1e
+    m_Address: Broadleaf_Desktop_ProceduralGen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 911049051104362579, guid: e96a88a812a24164ba96b13dc2d61f1e, type: 3}
+    m_TargetAsset: {fileID: 911049051104362579, guid: e96a88a812a24164ba96b13dc2d61f1e, type: 3}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6aa6aadec0db72247b46568e5fc970ca, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 92ad6a952e5bcbb4694509c63e3bc3e3, type: 2}
+    - {fileID: 11400000, guid: 664bb8e36fe10bc468719bae68ff0322, type: 2}
